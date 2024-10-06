@@ -1,0 +1,26 @@
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      # Używamy oficjalnego obrazu Pythona, więc Dockerfile nie jest wymagany
+      - image: circleci/python:3.8
+    steps:
+      - checkout  # pobiera kod źródłowy z repozytorium
+      - run:
+          name: Install dependencies
+          command: |
+            python -m venv venv
+            . venv/bin/activate
+            pip install -r requirements.txt
+      - run:
+          name: Run tests
+          command: |
+            . venv/bin/activate
+            pytest
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
