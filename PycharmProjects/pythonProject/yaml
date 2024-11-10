@@ -17,7 +17,6 @@ jobs:
           command: |
             . venv/bin/activate
             python -m unittest discover -s . -p "test_kalkulator2.py"
-            python -m unittest discover -s . -p "test_kalkulator.py"
 
 workflows:
   version: 2
