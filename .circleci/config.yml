@@ -1,28 +1,25 @@
-<<<<<<< HEAD
-=======
 version: 2.1
 
 jobs:
-  build:
+  test:
     docker:
-      - image: circleci/python:3.8
+      - image: circleci/python:3.8  # Wybór obrazu Dockera z Pythona 3.8
     steps:
-      - checkout
+      - checkout  # Pobiera kod źródłowy z repozytorium
       - run:
-          name: Install dependencies
+          name: Set up virtual environment
           command: |
             python -m venv venv
             . venv/bin/activate
-            pip install -r requirements.txt
+            pip install -r requirements.txt  # Instalacja zależności
       - run:
-          name: Run tests from test_kalkulator2.py
+          name: Run tests using unittest
           command: |
             . venv/bin/activate
-            python -m unittest discover -s . -p "test_kalkulator2.py"
+            python -m unittest discover -s tests -p "*.py"  # Uruchamia testy w folderze 'tests'
 
 workflows:
   version: 2
-  build_and_test:
+  test:
     jobs:
-      - build
->>>>>>> 8eddabe749f9a2428f5a7a4f901e10ee7e794bcc
+      - test
