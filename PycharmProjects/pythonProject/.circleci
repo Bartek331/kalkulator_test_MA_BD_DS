@@ -1,1 +1,25 @@
+version: 2.1
 
+jobs:
+  test:
+    docker:
+      - image: circleci/python:3.8  # Wybór obrazu Dockera z Pythona 3.8
+    steps:
+      - checkout  # Pobiera kod źródłowy z repozytorium
+      - run:
+          name: Set up virtual environment
+          command: |
+            python -m venv venv
+            . venv/bin/activate
+            pip install -r requirements.txt  # Instalacja zależności
+      - run:
+          name: Run tests using unittest
+          command: |
+            . venv/bin/activate
+            python -m unittest discover -s . -p "test_*.py"  # Uruchamia testy w katalogu głównym
+
+workflows:
+  version: 2
+  test:
+    jobs:
+      - test
