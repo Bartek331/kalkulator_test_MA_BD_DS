@@ -16,7 +16,8 @@ jobs:
           name: Run tests
           command: |
             . venv/bin/activate
-            python -m unittest discover -s . -p "test_*.py"
+            python -m unittest discover -s . -p "test_kalkulator2.py"
+            python -m unittest discover -s . -p "test_kalkulator.py"
 
 workflows:
   version: 2
